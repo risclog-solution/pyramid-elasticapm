@@ -1,4 +1,5 @@
 # https://www.elastic.co/de/blog/creating-custom-framework-integrations-with-the-elastic-apm-python-agent
+import re
 import sys
 
 import elasticapm
@@ -10,7 +11,11 @@ from pyramid.events import ApplicationCreated, subscriber
 
 def includeme(config):
     config.add_tween('pyramid_elasticapm.TweenFactory')
-    config.scan('pyramid_elasticapm')
+    config.scan('pyramid_elasticapm', ignore=[
+        re.compile(r'\.testing$').search,
+        re.compile(r'\.conftest$').search,
+        re.compile(r'\.tests\.').search,
+    ])
 
 
 @subscriber(ApplicationCreated)
