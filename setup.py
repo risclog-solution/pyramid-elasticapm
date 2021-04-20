@@ -47,7 +47,7 @@ Programming Language :: Python :: 3 :: Only
     description=__doc__.strip(),
     long_description=(
         '.. contents::\n\n'
-        + open(os.path.join('README.txt')).read()
+        + open(os.path.join('README.rst')).read()
         + '\n\n'
         + open('CHANGES.rst').read()
     ),
