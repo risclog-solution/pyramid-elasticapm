@@ -1,0 +1,8 @@
+include *.rst
+include *.txt
+
+exclude pytest
+exclude pytest.ini
+exclude *.yaml
+exclude *.lock
+exclude .isort.cfg

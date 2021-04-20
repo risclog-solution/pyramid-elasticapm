@@ -1,6 +1,7 @@
+import time
+
 from pyramid.config import Configurator
 from webtest import TestApp
-import time
 
 
 def make_app(server_url):
@@ -17,9 +18,7 @@ def make_app(server_url):
 
     config.add_route('index', '/')
     config.add_view(
-        lambda x: {'status': 'ok'},
-        route_name='index',
-        renderer='json'
+        lambda x: {'status': 'ok'}, route_name='index', renderer='json'
     )
 
     return config.make_wsgi_app()
