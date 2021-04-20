@@ -5,17 +5,20 @@ import sys
 import elasticapm
 import pkg_resources
 from elasticapm.utils import compat, get_url_dict
-from pyramid.util import reraise
 from pyramid.events import ApplicationCreated, subscriber
+from pyramid.util import reraise
 
 
 def includeme(config):
     config.add_tween('pyramid_elasticapm.TweenFactory')
-    config.scan('pyramid_elasticapm', ignore=[
-        re.compile(r'\.testing$').search,
-        re.compile(r'\.conftest$').search,
-        re.compile(r'\.tests\.').search,
-    ])
+    config.scan(
+        'pyramid_elasticapm',
+        ignore=[
+            re.compile(r'\.testing$').search,
+            re.compile(r'\.conftest$').search,
+            re.compile(r'\.tests\.').search,
+        ],
+    )
 
 
 @subscriber(ApplicationCreated)
@@ -24,7 +27,6 @@ def elasticapm_instrument(event):
 
 
 class TweenFactory:
-
     def __init__(self, handler, registry):
         self.handler = handler
         self.registry = registry
@@ -37,19 +39,19 @@ class TweenFactory:
             'ENVIRONMENT': settings['elasticapm.environment'],
         }
         if settings.get('elasticapm.transactions_ignore_patterns', ''):
-            config['TRANSACTIONS_IGNORE_PATTERNS'] = (
-                settings['elasticapm.transactions_ignore_patterns'].split()
-            )
+            config['TRANSACTIONS_IGNORE_PATTERNS'] = settings[
+                'elasticapm.transactions_ignore_patterns'
+            ].split()
 
         pkg_versions = dict()
         for pkg_name in (
             'pyramid',
             'pyramid_elasticapm',
-            settings['elasticapm.service_distribution']
+            settings['elasticapm.service_distribution'],
         ):
-            pkg_versions[pkg_name] = (
-                pkg_resources.get_distribution(pkg_name).version
-            )
+            pkg_versions[pkg_name] = pkg_resources.get_distribution(
+                pkg_name
+            ).version
 
         self.client = elasticapm.Client(
             config,
@@ -60,7 +62,7 @@ class TweenFactory:
             framework_version=pkg_versions['pyramid'],
             global_labels={
                 'pyramid_elasticapm': pkg_versions['pyramid_elasticapm']
-            }
+            },
         )
 
     def __call__(self, request):
