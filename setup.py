@@ -26,8 +26,8 @@ setup(
             'pytest_localserver',
         ]
     },
-    author='Sebastian Wehrmann <support@risclog.de>',
-    author_email='support@risclog.de',
+    author='Sebastian Wehrmann (riscLOG Solution GmbH)',
+    author_email='sebastian@risclog.com',
     license='BSD',
     url='https://github.com/risclog-solution/pyramid-elasticapm',
     keywords='elastic apm pyramid',
