@@ -86,12 +86,9 @@ class TweenFactory:
             elasticapm.set_context(
                 lambda: self.get_data_from_request(request), 'request'
             )
-            if hasattr(request, 'user') and request.user.id:
-                elasticapm.set_user_context(
-                    username=request.user.username,
-                    email=request.user.username,
-                    user_id=request.user.id,
-                )
+            elasticapm.set_user_context(
+                user_id=request.authenticated_userid,
+            )
             self.client.end_transaction(transaction_name, transaction_result)
 
     def get_data_from_request(self, request):
