@@ -9,7 +9,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='pyramid-elasticapm',
-    version='1.0.1.dev0',
+    version='1.0.1',
     install_requires=[
         'elastic-apm',
         'pyramid',

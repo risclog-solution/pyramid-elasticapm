@@ -3,7 +3,7 @@ Change log for pyramid-elasticapm
 =================================
 
 
-1.0.1 (unreleased)
+1.0.1 (2021-04-22)
 ==================
 
 - Be more compatible with retrieving user data from request.
