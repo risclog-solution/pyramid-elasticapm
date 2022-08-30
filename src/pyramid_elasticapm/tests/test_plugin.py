@@ -33,7 +33,7 @@ def test_get(apmserver):
     resp.mustcontain(b'{"status": "ok"}')
 
     # Give the apm integration some time to send requests to the apm server
-    time.sleep(1)
+    time.sleep(2)
 
     requests = apmserver.requests
     assert len(requests) != 0
@@ -50,7 +50,7 @@ def test_post(apmserver):
     resp.mustcontain(b'{"status": "ok"}')
 
     # Give the apm integration some time to send requests to the apm server
-    time.sleep(1)
+    time.sleep(2)
 
     requests = apmserver.requests
     assert len(requests) != 0

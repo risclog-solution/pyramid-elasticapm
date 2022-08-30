@@ -110,7 +110,7 @@ class TweenFactory:
         return data
 
     def get_data_from_response(self, response):
-        data = {'status_code': response.status_int}
+        data = {'status_code': response.status_int, 'body': response.body}
         if response.headers:
             data['headers'] = {
                 key: ';'.join(response.headers.getall(key))
