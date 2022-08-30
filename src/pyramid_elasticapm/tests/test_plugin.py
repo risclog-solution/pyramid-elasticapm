@@ -24,12 +24,29 @@ def make_app(server_url):
     return config.make_wsgi_app()
 
 
-def test_foo(apmserver):
+def test_get(apmserver):
     assert [] == apmserver.requests
 
     app = TestApp(make_app(apmserver.url))
 
     resp = app.get('/')
+    resp.mustcontain(b'{"status": "ok"}')
+
+    # Give the apm integration some time to send requests to the apm server
+    time.sleep(1)
+
+    requests = apmserver.requests
+    assert len(requests) != 0
+
+    assert 'Bearer <MY_SECRET_TOKEN>' == requests[0].headers['Authorization']
+
+
+def test_post(apmserver):
+    assert [] == apmserver.requests
+
+    app = TestApp(make_app(apmserver.url))
+
+    resp = app.post('/', dict(foo='bar'))
     resp.mustcontain(b'{"status": "ok"}')
 
     # Give the apm integration some time to send requests to the apm server

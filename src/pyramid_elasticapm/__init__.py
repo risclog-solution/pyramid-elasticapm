@@ -105,6 +105,8 @@ class TweenFactory:
         # remove Cookie header since the same data is in
         # request["cookies"] as well
         data['headers'].pop('Cookie', None)
+        if request.method.lower() == 'post':
+            data['body'] = request.body
         return data
 
     def get_data_from_response(self, response):

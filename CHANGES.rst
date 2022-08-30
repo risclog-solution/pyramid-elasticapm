@@ -6,7 +6,7 @@ Change log for pyramid-elasticapm
 1.0.2 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Add request body for POST requests.
 
 
 1.0.1 (2021-04-22)
