@@ -77,21 +77,25 @@ class TweenFactory:
         except Exception:
             transaction_result = '5xx'
             self.client.capture_exception(
-                context={'request': self.get_data_from_request(request)},
+                context={'request': self.get_data_from_request(
+                    request, response
+                )},
                 handled=False,
             )
             reraise(*sys.exc_info())
         finally:
             transaction_name = self.get_transaction_name(request)
             elasticapm.set_context(
-                lambda: self.get_data_from_request(request), 'request'
+                lambda: self.get_data_from_request(
+                    request, response
+                ), 'request'
             )
             elasticapm.set_user_context(
                 user_id=request.authenticated_userid,
             )
             self.client.end_transaction(transaction_name, transaction_result)
 
-    def get_data_from_request(self, request):
+    def get_data_from_request(self, request, response):
         data = {
             'headers': dict(**request.headers),
             'method': request.method,
@@ -105,8 +109,9 @@ class TweenFactory:
         # remove Cookie header since the same data is in
         # request["cookies"] as well
         data['headers'].pop('Cookie', None)
-        if request.response.status_code >= 400:
+        if response.status_code >= 400:
             data['body'] = request.body
+            data['response_body'] = response.body
         return data
 
     def get_data_from_response(self, response):
