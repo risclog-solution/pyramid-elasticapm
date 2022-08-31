@@ -3,7 +3,7 @@ Change log for pyramid-elasticapm
 =================================
 
 
-1.0.4 (unreleased)
+1.0.4 (2022-08-31)
 ==================
 
 - Request body was not added due to a bug, that is fixed now.
