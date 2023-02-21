@@ -121,7 +121,7 @@ class TweenFactory:
         if response.headers:
             data['headers'] = {
                 key: ';'.join(response.headers.getall(key))
-                for key in compat.iterkeys(response.headers)
+                for key in response.headers.iterkeys()
             }
         return data
 
