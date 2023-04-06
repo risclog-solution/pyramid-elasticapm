@@ -12,6 +12,7 @@ def make_app(server_url):
         'elasticapm.environment': 'testing',
         'elasticapm.service_distribution': 'pytest',
         'elasticapm.transactions_ignore_patterns': 'foo bar baz',
+        'elasticapm.transaction_sample_rate': 1.0,
     }
     config = Configurator(settings=settings)
     config.include('pyramid_elasticapm')

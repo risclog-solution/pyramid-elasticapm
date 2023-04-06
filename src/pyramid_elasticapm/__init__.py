@@ -37,6 +37,7 @@ class TweenFactory:
             'SERVER_URL': settings['elasticapm.server_url'],
             'SECRET_TOKEN': settings['elasticapm.secret_token'],
             'ENVIRONMENT': settings['elasticapm.environment'],
+            'TRANSACTION_SAMPLE_RATE': settings['elasticapm.transaction_sample_rate'],
         }
         if settings.get('elasticapm.transactions_ignore_patterns', ''):
             config['TRANSACTIONS_IGNORE_PATTERNS'] = settings[
