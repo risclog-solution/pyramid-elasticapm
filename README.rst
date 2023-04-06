@@ -42,3 +42,4 @@ namespace:
   package and put it into the metadata of every transaction.
 * `elasticapm.transactions_ignore_patterns`: Whitespace separated list of
   ignore patterns.
+* `elasticapm.transaction_sample_rate`: Transaction sample rate
