@@ -6,7 +6,7 @@ import elasticapm
 import pkg_resources
 from elasticapm.utils import compat, get_url_dict
 from pyramid.events import ApplicationCreated, subscriber
-from pyramid.util import reraise
+from pyramid._compat import reraise
 
 
 def includeme(config):
@@ -37,6 +37,7 @@ class TweenFactory:
             'SERVER_URL': settings['elasticapm.server_url'],
             'SECRET_TOKEN': settings['elasticapm.secret_token'],
             'ENVIRONMENT': settings['elasticapm.environment'],
+            'TRANSACTION_SAMPLE_RATE': settings['elasticapm.transaction_sample_rate'],
         }
         if settings.get('elasticapm.transactions_ignore_patterns', ''):
             config['TRANSACTIONS_IGNORE_PATTERNS'] = settings[
@@ -67,6 +68,8 @@ class TweenFactory:
 
     def __call__(self, request):
         self.client.begin_transaction('request')
+        transaction_result = ""
+        response = None
         try:
             response = self.handler(request)
             transaction_result = response.status[0] + 'xx'
@@ -109,7 +112,7 @@ class TweenFactory:
         # remove Cookie header since the same data is in
         # request["cookies"] as well
         data['headers'].pop('Cookie', None)
-        if response.status_code >= 400:
+        if response is not None and response.status_code >= 400:
             data['body'] = request.body
             data['response_body'] = response.body
         return data
@@ -121,7 +124,7 @@ class TweenFactory:
         if response.headers:
             data['headers'] = {
                 key: ';'.join(response.headers.getall(key))
-                for key in compat.iterkeys(response.headers)
+                for key in response.headers.iterkeys()
             }
         return data
 
