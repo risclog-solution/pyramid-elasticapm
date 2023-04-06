@@ -6,7 +6,7 @@ import elasticapm
 import pkg_resources
 from elasticapm.utils import compat, get_url_dict
 from pyramid.events import ApplicationCreated, subscriber
-from pyramid._compat import reraise
+from pyramid.util import reraise
 
 
 def includeme(config):
