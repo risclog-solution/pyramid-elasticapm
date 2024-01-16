@@ -37,7 +37,7 @@ repos:
     # - id: no-commit-to-branch
     #   args: [--branch, master]
     - id: check-added-large-files
-      args: [--maxkb=1000]
+      args: [--maxkb=6000]
     - id: check-merge-conflict
     - id: check-symlinks
 
@@ -49,13 +49,11 @@ repos:
     - id: fix-encoding-pragma
       args: [--remove]
 
-    # This checks that all links to our VCS are permalinks. How oddly specific!
-    - id: check-vcs-permalinks
-
-  - repo: https://gitlab.com/pycqa/flake8
-    rev: 3.8.4
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.0.264"
     hooks:
-      - id: flake8
+    - id: ruff
+      args: [--fix, --exit-non-zero-on-fix]
   - repo: https://github.com/asottile/pyupgrade
     rev: v2.9.0
     hooks:
@@ -69,10 +67,11 @@ repos:
     hooks:
     - id: isort
   - repo: https://github.com/psf/black
-    rev: 20.8b1
+    rev: 22.3.0
     hooks:
     - id: black
   - repo: https://github.com/mgedmin/check-manifest
     rev: '0.46'
     hooks:
     - id: check-manifest
+      args: [--no-build-isolation]

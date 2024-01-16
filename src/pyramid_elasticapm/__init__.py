@@ -78,18 +78,17 @@ class TweenFactory:
         except Exception:
             transaction_result = '5xx'
             self.client.capture_exception(
-                context={'request': self.get_data_from_request(
-                    request, response
-                )},
+                context={
+                    'request': self.get_data_from_request(request, response)
+                },
                 handled=False,
             )
             reraise(*sys.exc_info())
         finally:
             transaction_name = self.get_transaction_name(request)
             elasticapm.set_context(
-                lambda: self.get_data_from_request(
-                    request, response
-                ), 'request'
+                lambda: self.get_data_from_request(request, response),
+                'request',
             )
             elasticapm.set_user_context(
                 user_id=request.authenticated_userid,

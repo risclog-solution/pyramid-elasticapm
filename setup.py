@@ -19,11 +19,11 @@ setup(
             'pytest',
             'pytest-cache',
             'pytest-cov',
-            'pytest-flake8',
             'pytest-rerunfailures',
             'pytest-sugar',
             'webtest',
             'pytest_localserver',
+            'elastic-apm<6.8',
         ]
     },
     author='Sebastian Wehrmann (riscLOG Solution GmbH)',
