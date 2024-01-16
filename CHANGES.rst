@@ -3,6 +3,12 @@ Change log for pyramid-elasticapm
 =================================
 
 
+1.0.6 (unreleased)
+==================
+
+- Nothing changed yet.
+
+
 1.0.5 (2024-01-16)
 ==================
 
