@@ -6,7 +6,7 @@ Change log for pyramid-elasticapm
 1.0.5 (unreleased)
 ==================
 
-- Nothing changed yet.
+- fix: `response` variable was used before assignment in error handler.
 
 
 1.0.4 (2022-08-31)

@@ -67,6 +67,7 @@ class TweenFactory:
 
     def __call__(self, request):
         self.client.begin_transaction('request')
+        response = None
         try:
             response = self.handler(request)
             transaction_result = response.status[0] + 'xx'
@@ -109,7 +110,7 @@ class TweenFactory:
         # remove Cookie header since the same data is in
         # request["cookies"] as well
         data['headers'].pop('Cookie', None)
-        if response.status_code >= 400:
+        if response and response.status_code >= 400:
             data['body'] = request.body
             data['response_body'] = response.body
         return data
