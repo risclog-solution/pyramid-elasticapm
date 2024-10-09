@@ -3,7 +3,7 @@ Change log for pyramid-elasticapm
 =================================
 
 
-1.0.6 (unreleased)
+1.1.0 (2024-10-09)
 ==================
 
 - feat: Update to Python 3.10.
