@@ -9,7 +9,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='pyramid-elasticapm',
-    version='1.1.1.dev0',
+    version='1.2.0.dev0',
     install_requires=[
         'elastic-apm',
         'pyramid',
@@ -37,6 +37,7 @@ Programming Language :: Python
 Programming Language :: Python :: 3
 Programming Language :: Python :: 3.9
 Programming Language :: Python :: 3.10
+Programming Language :: Python :: 3.11
 Programming Language :: Python :: 3 :: Only
 """[
         :-1

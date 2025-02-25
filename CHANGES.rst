@@ -6,7 +6,7 @@ Change log for pyramid-elasticapm
 1.1.1 (unreleased)
 ==================
 
-- Nothing changed yet.
+- fix: Compatability to newest elastic-apm package.
 
 
 1.1.0 (2024-10-09)

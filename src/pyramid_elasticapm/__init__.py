@@ -4,7 +4,7 @@ import sys
 
 import elasticapm
 import pkg_resources
-from elasticapm.utils import compat, get_url_dict
+from elasticapm.utils import get_url_dict
 from pyramid.events import ApplicationCreated, subscriber
 from pyramid.util import reraise
 
@@ -121,7 +121,7 @@ class TweenFactory:
         if response.headers:
             data['headers'] = {
                 key: ';'.join(response.headers.getall(key))
-                for key in compat.iterkeys(response.headers)
+                for key in response.headers.keys()
             }
         return data
 
